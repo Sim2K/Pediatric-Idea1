@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Idea 1 · Pediatric Intake Command</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./theme.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./undo.css">
+  <script defer src="./vendor/chart.umd.js"></script>
+  <script defer src="./undo-window.js"></script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="Pediatric Intake home"><span class="brand-mark">a<span>+</span></span><span><b>americare</b><small>INTAKE STUDIO</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item is-active" data-view="overview"><span class="nav-icon">◫</span><span>Overview</span></button>
+        <button class="nav-item" data-view="all"><span class="nav-icon">▦</span><span>All cases</span><em id="nav-all">12</em></button>
+        <button class="nav-item" data-view="active"><span class="nav-icon">◉</span><span>Active cases</span><em id="nav-active">11</em></button>
+        <button class="nav-item" data-view="board"><span class="nav-icon">▥</span><span>Case board</span></button>
+      </nav>
+      <div class="side-label side-label-queues">PRIORITY QUEUES</div>
+      <nav class="side-nav" aria-label="Priority queues">
+        <button class="nav-item" data-view="exceptions"><span class="nav-icon">!</span><span>Exceptions</span><em id="nav-exceptions">5</em></button>
+        <button class="nav-item" data-view="holds"><span class="nav-icon">Ⅱ</span><span>Holds</span><em id="nav-holds">2</em></button>
+        <button class="nav-item" data-view="followups"><span class="nav-icon">↗</span><span>Follow-ups due</span><em id="nav-followups">5</em></button>
+        <button class="nav-item" data-view="ready"><span class="nav-icon">✓</span><span>Ready for intake</span><em id="nav-ready">1</em></button>
+        <button class="nav-item" data-view="certification"><span class="nav-icon">✳</span><span>Certification</span><em id="nav-certification">1</em></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-note"><span class="note-sun">✦</span><strong>Care moves together.</strong><p>One clear view of each referral, every morning.</p></div>
+        <button id="theme-toggle-side" class="theme-switch" type="button" aria-label="Switch appearance"><span class="theme-symbol">☾</span><span>Switch appearance</span></button>
+        <div class="profile"><div class="avatar">BW</div><div><strong>Blair Williams</strong><small>Supervisor workspace</small></div><span class="profile-more">···</span></div>
+      </div>
+    </aside>
+    <div class="main-wrap">
+      <header class="topbar"><button id="menu-button" class="icon-button menu-button" type="button" aria-label="Collapse menu" aria-expanded="true">☰</button><div class="breadcrumb">Pediatric Intake <span>/</span> <b id="breadcrumb-page">Overview</b></div><div class="top-actions"><span class="demo-tag">SYNTHETIC DEMO</span><span class="top-date" id="today-date"></span><button id="theme-toggle" class="icon-button" type="button" aria-label="Switch appearance">☾</button><span class="top-avatar">BW</span></div></header>
+      <main class="main-content" id="main-content">
+        <section id="overview-view" class="view">
+          <div class="page-heading"><div><p class="eyebrow">SUPERVISOR OVERVIEW <span class="eyebrow-dot"></span> DAILY BRIEF</p><h1>Good morning, Blair<span class="heading-period">.</span></h1><p class="page-subtitle">A calmer way to see what needs attention in pediatric intake.</p></div><button class="outline-button" id="overview-all">Explore all cases <span>↗</span></button></div>
+          <section class="hero" aria-label="Today's priority"><div class="hero-copy"><div class="hero-kicker"><span class="hero-pulse"></span> TODAY’S FOCUS</div><h2>Keep care<br><em>moving forward.</em></h2><p><strong id="hero-followups">5 follow-ups</strong> need a response, while <strong id="hero-ready">1 case</strong> is ready for your intake review. Start with the work that can move today.</p><button class="hero-button" id="hero-focus">Open priority queue <span>↗</span></button></div><div class="hero-visual" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="hero-stat"><small>CASES MOVING</small><strong id="hero-active">11<span>/12</span></strong><div class="stat-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="float-label float-one">Care, in motion <b>↗</b></span><span class="float-label float-two" id="hero-ready-badge">01 READY</span></div></section>
+          <section class="metrics" aria-label="Intake snapshot"><button class="metric" data-jump="active"><span class="metric-icon icon-blue">◉</span><span class="metric-label">Active cases</span><strong id="metric-active">11</strong><span class="metric-footer">Across the intake journey <span>↗</span></span></button><button class="metric" data-jump="exceptions"><span class="metric-icon icon-coral">!</span><span class="metric-label">Exceptions</span><strong id="metric-exceptions">5</strong><span class="metric-footer">3 arrival · 2 in-flight <span>↗</span></span></button><button class="metric" data-jump="holds"><span class="metric-icon icon-gold">Ⅱ</span><span class="metric-label">Active holds</span><strong id="metric-holds">2</strong><span class="metric-footer">Require a dependency <span>↗</span></span></button><button class="metric" data-jump="ready"><span class="metric-icon icon-teal">✓</span><span class="metric-label">Ready for review</span><strong id="metric-ready">1</strong><span class="metric-footer">Supervisor decision <span>↗</span></span></button></section>
+          <section class="overview-grid"><div class="panel flow-panel"><div class="panel-heading"><div><p class="eyebrow">OPERATIONS</p><h3>Intake flow</h3><p>Where today’s cases sit in the journey.</p></div><button class="text-link" data-jump="board">View board ↗</button></div><div class="chart-container"><canvas id="stage-chart" aria-label="Case count by stage" role="img"></canvas><div class="chart-fallback" hidden>Chart unavailable. Use the case board to view stage counts.</div></div></div><div class="panel attention-panel"><div class="panel-heading"><div><p class="eyebrow">YOUR SHORTLIST</p><h3>Needs your attention</h3></div><span class="attention-count">5 DUE</span></div><div id="attention-list" class="attention-list"></div><button class="attention-footer" data-jump="followups">View all follow-ups <span>↗</span></button></div></section>
+          <section class="panel momentum-panel"><div class="panel-heading"><div><p class="eyebrow">WEEKLY PULSE</p><h3>Momentum, at a glance</h3><p>Illustrative activity across the last seven demo days.</p></div></div><div class="chart-container momentum-chart"><canvas id="momentum-chart" aria-label="Illustrative weekly referral and progression trend" role="img"></canvas><div class="chart-fallback" hidden>Chart unavailable.</div></div></section>
+          <section class="lower-grid"><div class="panel ready-panel"><div class="panel-heading"><div><p class="eyebrow">DECISION POINT</p><h3>Ready for intake</h3></div><span class="ready-check">✓</span></div><div id="ready-feature"></div></div><div class="panel exception-panel"><div class="panel-heading"><div><p class="eyebrow">SUPERVISOR LENS</p><h3>Arrival blockers</h3></div><button class="text-link" data-jump="exceptions">See all ↗</button></div><div id="blocker-list"></div></div></section>
+          <p class="footnote">Demo data is synthetic. Queue and stage definitions follow the supplied pediatric intake reference.</p>
+        </section>
+        <section id="list-view" class="view" hidden><div class="list-intro"><div><p class="eyebrow">PEDIATRIC INTAKE / <span id="list-kicker">CASES</span></p><h1 id="list-title">All cases<span class="heading-period">.</span></h1><p id="list-description" class="page-subtitle"></p></div><div class="list-count"><strong id="list-count">12</strong><span>CASES</span></div></div><div class="panel list-panel"><div class="list-tools"><label class="search-field"><span>⌕</span><input id="case-search" type="search" placeholder="Search child, case, source or owner" autocomplete="off"></label><select id="stage-filter" aria-label="Filter by stage"><option value="all">All stages</option></select><span id="result-count" class="result-count"></span></div><div id="case-list" class="case-list"></div></div></section>
+        <section id="board-view" class="view" hidden><div class="list-intro"><div><p class="eyebrow">PEDIATRIC INTAKE / WORKFLOW</p><h1>Case board<span class="heading-period">.</span></h1><p class="page-subtitle">Drag a card forward into a stage with space. Demo limits are shown on each column. Use Move to on keyboard or mobile as an alternative.</p></div><div class="board-tools"><button type="button" class="outline-button" id="reset-board">Reset demo board ↺</button><div class="list-count"><strong id="board-count">11</strong><span>ACTIVE</span></div></div></div><div id="board" class="board"></div></section>
+      </main>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="modal-backdrop" hidden></div><aside class="detail-drawer" id="detail-drawer" aria-label="Case snapshot" aria-hidden="true"><div class="drawer-top"><span class="eyebrow">CASE SNAPSHOT</span><button id="drawer-close" class="icon-button" aria-label="Close case snapshot">×</button></div><div id="drawer-content"></div></aside>
+  <div class="full-backdrop" id="full-backdrop" hidden></div><section class="full-modal" id="full-modal" role="dialog" aria-modal="true" aria-labelledby="full-title" aria-hidden="true" tabindex="-1"><header class="full-head"><div><p class="eyebrow">COMPLETE CASE RECORD · SYNTHETIC DEMO</p><h2 id="full-title"></h2><p id="full-subtitle"></p></div><button class="icon-button" id="full-close" type="button" aria-label="Close full case details">×</button></header><div id="full-path" class="full-path"></div><div id="full-tabs" class="full-tabs" role="tablist" aria-label="Case detail sections"></div><div id="full-body" class="full-body" role="tabpanel"></div></section>
+  <section id="move-undo" class="move-undo" role="status" aria-live="polite" aria-label="Move pending. Undo is available for 20 seconds." hidden><div class="move-undo-copy"><span class="move-undo-kicker">MOVE PENDING</span><strong data-undo-label></strong><span class="move-undo-time" aria-hidden="true">Saving in <b data-undo-seconds>20s</b></span></div><button type="button" data-undo-button>Undo move</button><div class="move-undo-track"><span data-undo-bar role="progressbar" aria-label="Time left to undo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"></span></div></section>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root {
+  color-scheme: light;
+  --font-main: 'Manrope', Arial, sans-serif;
+  --primary: #2940C2;
+  --deep: #182B69;
+  --coral: #DA3545;
+  --teal: #208E89;
+  --primary-emphasis: #2940C2;
+  --coral-emphasis: #DA3545;
+  --teal-emphasis: #208E89;
+  --powder: #E4F1FF;
+  --ivory: #F8F6F1;
+  --ink: #202842;
+  --page: #F8F6F1;
+  --surface: #FFFFFF;
+  --surface-alt: #F2F5FA;
+  --surface-tint: #E4F1FF;
+  --text: #202842;
+  --muted: #62718B;
+  --line: #DDE4EF;
+  --primary-contrast: #FFFFFF;
+  --primary-ink: #FFFFFF;
+  --accent-ink: #FFFFFF;
+  --tint-text: #182B69;
+  --action-text: #182B69;
+  --hero-text: #FFFFFF;
+  --shadow: 0 22px 65px rgba(24,43,105,.09);
+  --shadow-soft: 0 8px 25px rgba(24,43,105,.07);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 13px;
+  --radius-sm: 9px;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #111A35;
+  --surface: #1C2948;
+  --surface-alt: #253554;
+  --surface-tint: #233F66;
+  --text: #F2F6FF;
+  --muted: #ADC0D8;
+  --line: #354666;
+  --deep: #182B69;
+  --primary-emphasis: #8DA3FF;
+  --coral-emphasis: #FF8190;
+  --teal-emphasis: #71D4CA;
+  --primary-ink: #182B69;
+  --accent-ink: #182B69;
+  --tint-text: #F2F6FF;
+  --action-text: #F2F6FF;
+  --shadow: 0 22px 65px rgba(0,0,0,.25);
+  --shadow-soft: 0 8px 25px rgba(0,0,0,.19);
+}

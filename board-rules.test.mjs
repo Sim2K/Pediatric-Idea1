@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {checkMove,stageCapacity} from './board-rules.js';
+const stages = Object.keys(stageCapacity);
+const item = {name:'Test case',stage:stages[0]};
+assert.equal(checkMove(item,stages[2],[item],stages).ok,true);
+assert.match(checkMove(item,stages[0],[item],stages).message,/forward/);
+assert.match(checkMove({...item,stage:stages[2]},stages[1],[item],stages).message,/forward/);
+const full = Array.from({length:stageCapacity[stages[1]]},()=>({stage:stages[1]}));
+assert.match(checkMove(item,stages[1],[item,...full],stages).message,/capacity/);
+console.log('Idea 1 board movement rules pass');
