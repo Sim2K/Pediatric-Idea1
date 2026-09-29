@@ -5,9 +5,11 @@
   --primary: #2940C2;
   --deep: #182B69;
   --coral: #DA3545;
+  --amber: #D58734;
   --teal: #208E89;
   --primary-emphasis: #2940C2;
   --coral-emphasis: #DA3545;
+  --amber-emphasis: #925011;
   --teal-emphasis: #208E89;
   --powder: #E4F1FF;
   --ivory: #F8F6F1;
@@ -44,6 +46,7 @@
   --deep: #182B69;
   --primary-emphasis: #8DA3FF;
   --coral-emphasis: #FF8190;
+  --amber-emphasis: #FFC27B;
   --teal-emphasis: #71D4CA;
   --primary-ink: #182B69;
   --accent-ink: #182B69;

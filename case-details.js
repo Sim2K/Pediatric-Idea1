@@ -1,93 +1,74 @@
-// Read-only synthetic records transcribed from Details/026–038.
-export const detailTabs = ['Summary','Services and aide','Medical and DE','Documents','Conversation','Timeline','Internal notes'];
-const commonServices = [
-  ['Services in the home already','No'],['Services requested','Aide'],
-  ['Discharge from another CHHA required','No'],['Hours requested','25 per week'],['Above-40 approval','N/A']
-];
-const commonEligibility = [
-  ['Code 95 present','Yes'],['H78 on record','No'],['Third-party insurance','No'],
-  ['Third-party carrier','—']
-];
+// Read-only records generated from the deployed synthetic pediatric intake demo.
+import {sourceData} from './source-data.js';
 
-export const detailedCases = {
-  'CAS-00412': {
-    summary: [
-      {title:'Case and family',fields:[['Case origin','New referral'],['Date of birth','Mar 14, 2019'],['Medicaid ID','AB41207Z'],['Age at referral','7 years'],['Borough / county','Brooklyn'],['Family language','Spanish'],['Address','1247 Ocean Pkwy, Apt 3B'],['Referral received','Aug 13, 2026'],['Parent name','Rosa Alvarez'],['Relationship to child','Mother'],['Parent phone','(347) 555-0182'],['Parent email','—']]},
-      {title:'Referral',fields:[['Referral source','Z Best Home Care'],['Referral source type','LHCSA'],['Referring contact','Elisa Roth'],['Contact email','eroth@zbesthc.example'],['Always copied on updates','Z Best intake desk · peds@zbesthc.example']],note:'Duplicate check clear against referrals seen in this system. Home Care Homebase was not checked.'},
-      {title:'Eligibility',fields:[['Medicaid status as submitted','Managed Medicaid'],['Medicaid status verified','Managed'],...commonEligibility,['Verified by','Mary Noto'],['Verified on','Aug 14, 2026'],['Case type (provisional)','DE'],['Case type','DE']],checks:['OPWDD eligibility','Pediatric eligibility','Insurance type','Requested services','Geographic coverage','Aide to train'],note:'Routing: Spanish narrowed the pool to Spanish speakers. Mary Noto had the fewest open cases at that moment.'}
-    ],
-    services: [
-      {title:'Services',fields:commonServices,note:'Hours requested is informational in the source workflow. Above 40 shows a notice and stops there.'},
-      {title:'Aide',fields:[['Aide arrangement','Train own'],['Aide in training','No'],['Aide name','Ines Batista'],['Relationship to child','Grandparent'],['Training placement','—'],['Weekly schedule','Mon–Fri 3pm–8pm']],note:'No active holds. Awaiting LHCSA staffing is tracked as an exception, not a hold.'}
-    ],
-    medical: [
-      {title:'Medical',fields:[['Medical vendor','Suffolk Medical Group'],['Packet generated','Yes'],['Packet sent','Aug 23, 2026'],['Telehealth scheduled','Aug 27, 2026'],['Telehealth completed','—'],['Signed medical returned','—'],['Visit notes received','—']],note:'The packet uses the client order form. The mailbox parser sets telehealth scheduled from a vendor reply; uncertain replies go to review.'},
-      {title:'Disenrollment',fields:[['DE submitted','Aug 16, 2026'],['DE confirmed','—'],['H78 on record','No'],['Target conversion date','Sep 1, 2026'],['Days remaining in source snapshot','5']],note:'The source calls for a named family touchpoint every two weeks while the conversion date is in the future.'}
-    ],
-    documents: [['Physician order packet - Kayden_Alvarez.pdf','Flow 16, generated','Aug 23, 2026','142 KB']],
-    conversation: [
-      ['Email · Referring contact','Referral received - Kayden Alvarez','We have Kayden Alvarez’s referral. Mary Noto is on it and will come back to you when the family has been reached.','Aug 13, 2026 9:14 AM · Delivered'],
-      ['SMS · Family','First contact','Hi Rosa, this is Mary Noto from Care Management. Elisa Roth at Z Best Home Care sent us Kayden’s referral. I will call you shortly, or you can book a time here: care-mgmt.example/book','Aug 14, 2026 1:13 PM · Delivered'],
-      ['SMS · Rosa Alvarez','Reply','Yes hello, after 4pm is best for me. Thank you','Aug 15, 2026 3:12 PM · Received'],
-      ['Email · Medical vendor','Kayden Alvarez - physician order packet','Attached is the completed order form for Kayden Alvarez, Mar 14, 2019, Medicaid AB41207Z. Please schedule the televisit and return the signed order.','Aug 23, 2026 10:04 AM · Delivered'],
-      ['Email · Suffolk Medical Group','RE: Kayden Alvarez - physician order packet','Scheduled for Aug 27, 2026 at 6:15 PM. Parent confirmed.','Aug 25, 2026 11:02 AM · Received'],
-      ['SMS · Family','Televisit preparation','Hi Rosa, Kayden’s televisit with the doctor is Aug 27, 2026. Please save the number they call from, unknown numbers are often blocked and the visit fails.','Aug 25, 2026 12:02 PM · Delivered']
-    ],
-    timeline: [
-      ['Referral received from Z Best Home Care, submitted by Elisa Roth.','System · Aug 13, 2026 8:38 AM'],
-      ['Duplicate check on Medicaid ID AB41207Z came back clear against referrals this system has seen.','System · Aug 13, 2026 8:38 AM'],
-      ['Return obligation recorded against Z Best Home Care.','System · Aug 13, 2026 8:38 AM'],
-      ['Reported managed Medicaid, so provisionally a disenrollment case.','Routing · Aug 13, 2026 8:38 AM'],
-      ['Spanish language and lowest open caseload routed the case to Mary Noto.','Routing · Aug 13, 2026 8:38 AM'],
-      ['Medicaid status awaited ePACES verification by Mary Noto.','Routing · Aug 13, 2026 8:38 AM'],
-      ['Eligibility verified on ePACES: Managed Medicaid, Code 95 present.','System · Aug 14, 2026 11:31 AM'],
-      ['Moved to Family contacted; update 2 of 5 sent to Elisa Roth.','Stage change · Aug 15, 2026 2:24 PM'],
-      ['Packet generated and emailed to Suffolk Medical Group; saved to Documents.','System · Aug 23, 2026 10:28 AM'],
-      ['Mailbox parser set Telehealth scheduled; update 3 of 5 sent to Elisa Roth.','System · Aug 25, 2026 11:14 AM']
-    ]
-  },
-  'CAS-00418': {
-    summary: [
-      {title:'Case and family',fields:[['Case origin','New referral'],['Date of birth','Nov 2, 2016'],['Medicaid ID','BC41883Y'],['Age at referral','9 years'],['Borough / county','Brooklyn'],['Family language','Yiddish'],['Address','842 E 21st St'],['Referral received','Aug 1, 2026'],['Parent name','Miriam Klein'],['Relationship to child','Mother'],['Parent phone','(718) 555-0347'],['Parent email','mklein@example.com']]},
-      {title:'Referral',fields:[['Referral source','High Standard Home Care'],['Referral source type','LHCSA'],['Referring contact','John Reyes'],['Contact email','jreyes@highstandardhc.example'],['Always copied on updates','High Standard intake · intake@highstandardhc.example']],note:'Duplicate check clear against referrals seen in this system. Home Care Homebase was not checked.'},
-      {title:'Eligibility',fields:[['Medicaid status as submitted','Straight Medicaid'],['Medicaid status verified','Straight'],...commonEligibility,['Verified by','Justin Delluomo'],['Verified on','Aug 2, 2026'],['Case type (provisional)','Straight'],['Case type','Straight']],checks:['OPWDD eligibility','Pediatric eligibility','Insurance type','Requested services','Geographic coverage','Aide to train'],note:'Justin Delluomo had the fewest open cases at routing. The active aide-training hold blocks progression beyond Signed medical returned in the source workflow.'}
-    ],
-    services: [
-      {title:'Services',fields:commonServices,note:'Hours requested is informational in the source workflow. Above 40 shows a notice and stops there.'},
-      {title:'Aide',fields:[['Aide arrangement','Train own'],['Aide in training','Yes'],['Aide name','Chana Weiss'],['Relationship to child','Aunt or uncle'],['Training placement','Anchor Home Healthcare'],['Weekly schedule','Sun–Thu 4pm–9pm']],note:'Active hold: aide in training for 17 days in the source snapshot. Chana Weiss is training at Anchor Home Healthcare.'}
-    ],
-    medical: [
-      {title:'Medical',fields:[['Medical vendor','Path Care Medical'],['Packet generated','Yes'],['Packet sent','Aug 11, 2026'],['Telehealth scheduled','Aug 17, 2026'],['Telehealth completed','Aug 16, 2026'],['Signed medical returned','Aug 18, 2026'],['Visit notes received','Aug 18, 2026']],note:'The source lists a completion date before the scheduled date; both values are shown as supplied. The packet uses the client order form and vendor replies are parsed for scheduling.'},
-      {title:'Disenrollment',fields:[['Status','Not a disenrollment case']]}
-    ],
-    documents: [
-      ['Physician order packet - Devorah_Klein.pdf','Flow 16, generated','Aug 11, 2026','142 KB'],
-      ['Signed order - Devorah_Klein.pdf','Mailbox parser, vendor reply','Aug 18, 2026','318 KB'],
-      ['Televisit notes - Devorah_Klein.pdf','Mailbox parser, vendor reply','Aug 18, 2026','96 KB']
-    ],
-    conversation: [
-      ['Email · Referring contact','Referral received - Devorah Klein','We have Devorah Klein’s referral. Justin Delluomo is on it and will come back to you when the family has been reached.','Aug 1, 2026 9:26 AM · Delivered'],
-      ['SMS · Family','First contact','Hi Miriam, this is Justin Delluomo from Care Management. John Reyes at High Standard Home Care sent us Devorah’s referral. I will call you shortly, or you can book a time here: care-mgmt.example/book','Aug 2, 2026 1:25 PM · Delivered'],
-      ['SMS · Miriam Klein','Reply','Yes hello, after 4pm is best for me. Thank you','Aug 3, 2026 3:24 PM · Received'],
-      ['Email · Medical vendor','Devorah Klein - physician order packet','Attached is the completed order form for Devorah Klein, Nov 2, 2016, Medicaid BC41883Y. Please schedule the televisit and return the signed order.','Aug 11, 2026 10:16 AM · Delivered'],
-      ['Email · Path Care Medical','RE: Devorah Klein - physician order packet','Scheduled for Aug 17, 2026 at 6:15 PM. Parent confirmed.','Aug 15, 2026 11:12 AM · Received'],
-      ['SMS · Family','Televisit preparation','Hi Miriam, Devorah’s televisit with the doctor is Aug 17, 2026. Please save the number they call from, unknown numbers are often blocked and the visit fails.','Aug 15, 2026 12:12 PM · Delivered'],
-      ['Email · Path Care Medical','Signed order + visit notes','Signed order attached, visit notes in the second attachment.','Aug 18, 2026 10:09 AM · Received'],
-      ['Email · Training agency','Aide training status','Chana Weiss has been in training since Aug 10, 2026. Can you tell me where the background check and fingerprinting stand? The case cannot move until training completes.','Aug 21, 2026 9:06 AM · Delivered']
-    ],
-    timeline: [
-      ['Referral received from High Standard Home Care, submitted by John Reyes.','System · Aug 1, 2026 8:02 AM'],
-      ['Duplicate check on Medicaid ID BC41883Y came back clear against referrals this system has seen.','System · Aug 1, 2026 8:02 AM'],
-      ['Return obligation recorded against High Standard Home Care.','System · Aug 1, 2026 8:02 AM'],
-      ['Reported straight Medicaid, so provisionally a straight Medicaid case.','Routing · Aug 1, 2026 8:02 AM'],
-      ['Fewest open cases routed this case to Justin Delluomo.','Routing · Aug 1, 2026 8:02 AM'],
-      ['Medicaid status awaited ePACES verification by Justin Delluomo.','Routing · Aug 1, 2026 8:02 AM'],
-      ['Eligibility verified on ePACES: Straight Medicaid, Code 95 present.','System · Aug 2, 2026 11:55 AM'],
-      ['Moved to Family contacted; update 2 of 5 sent to John Reyes.','Stage change · Aug 3, 2026 2:48 PM'],
-      ['Hold raised: Chana Weiss is in aide training at Anchor Home Healthcare.','Hold · Aug 10, 2026 9:59 AM'],
-      ['Packet generated and emailed to Path Care Medical; saved to Documents.','System · Aug 11, 2026 10:52 AM'],
-      ['Mailbox parser set Telehealth scheduled; update 3 of 5 sent to John Reyes.','System · Aug 15, 2026 11:24 AM'],
-      ['Signed medical returned and saved to Documents; update 4 of 5 sent to John Reyes.','System · Aug 18, 2026 10:03 AM']
-    ]
-  }
-};
+export const detailTabs = ['Summary','Services and aide','Medical and DE','Documents','Conversation','Timeline','Internal notes'];
+export const sourceCases = Object.fromEntries(sourceData.cases.map(c=>[c.id,c]));
+export const messageTemplates = sourceData.templates;
+
+const [year,month,date] = sourceData.snapshotDate.split('-').map(Number);
+const snapshot = Date.UTC(year,month-1,date);
+const dayFormat = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'});
+const offsetDate = days => days == null ? '—' : dayFormat.format(new Date(snapshot-days*86400000));
+const calendarDate = value => value ? dayFormat.format(new Date(`${value}T12:00:00Z`)) : '—';
+const text = value => value == null || value === '' ? '—' : String(value);
+const yesNo = value => value ? 'Yes' : 'No';
+const knownBoolean = value => value == null ? '—' : yesNo(value);
+const time = (days,hour,minute) => `${offsetDate(days)} ${hour%12||12}:${String(minute).padStart(2,'0')} ${hour>=12?'PM':'AM'}`;
+const checkLabels = ['OPWDD eligibility','Pediatric eligibility','Insurance type','Requested services','Geographic coverage','Aide to train'];
+const ageAtSnapshot = dob => Math.floor((snapshot-new Date(dob).getTime())/31557600000);
+const field = (label,value) => [label,text(value)];
+
+function summaryFor(c){
+ const copied=c.extra.length?c.extra.map(item=>`${item.n} · ${item.e}`).join('; '):'Nobody else is copied on this case.';
+ const summary=[
+  {title:'Case and family',fields:[field('Case ID',c.id),field('Case origin','New referral'),field('Child name',c.child),field('Date of birth',c.dob),field('Medicaid ID',c.mid),field('Age at referral',`${ageAtSnapshot(c.dob)} years`),field('Borough / county',c.boro),field('Family language',c.lang),field('Address',c.addr),field('Referral received',calendarDate(c.receivedOn)),field('Parent name',c.parent),field('Relationship to child',c.prel),field('Parent phone',c.pphone),field('Parent email',c.pemail)]},
+  {title:'Referral',fields:[field('Referral source',c.source),field('Referral source type',c.sourceType),field('Referring contact',c.contact),field('Contact email',c.cemail),field('Always copied on updates',copied),field('Duplicate check',c.dupe),field('Matched case',c.matched)],note:c.dupeNote||'Checked on the Medicaid ID against referrals this system has seen. Home Care Homebase was not checked.'},
+  {title:'Eligibility',fields:[field('Medicaid status as submitted',c.submitted),field('Medicaid status verified',c.verified),field('Code 95 present',knownBoolean(c.code95)),field('H78 on record',c.verified?yesNo(c.h78):'—'),field('Verified by',c.verifiedBy),field('Verified on',c.verified?calendarDate(c.verifiedDate):'—'),field('Third-party insurance',c.verified?yesNo(c.tpl):'—'),field('Third-party carrier',c.tplCarrier),field('Case type (provisional)',c.prov),field('Case type',c.type)],checks:checkLabels.map((label,index)=>[label,Boolean(c.chk[index])])}
+ ];
+ if(c.exc.length)summary.push(...c.exc.map(item=>({title:`${item.k}: ${item.r}`,fields:[field('What needs attention',item.d),field('Raised',`${item.raised} days ago`)]})));
+ if(c.aideTraining)summary.push({title:'Active hold',fields:[field('Reason','Aide in training'),field('Aide',c.aideName),field('Training agency',c.trainPlace),field('Held for','17 days')],note:'This case cannot advance past Signed medical returned until the hold clears.'});
+ if(c.discharge)summary.push({title:'Active hold',fields:[field('Reason','Discharge from other agency required'),field('Agency',c.dischargeAgency),field('Agreed discharge date',calendarDate(c.dischargeDateLocal)),field('Held for','11 days')],note:'This case cannot advance past Signed medical returned until the hold clears.'});
+ return summary;
+}
+
+function servicesFor(c){
+ const services={title:'Services',fields:[field('Services in the home already',yesNo(c.existing)),field('Services requested',c.hours?'Aide':'—'),field('Existing services detail',c.existingDetail),field('Discharge from another CHHA required',yesNo(c.discharge)),field('Discharging agency',c.dischargeAgency),field('Agreed discharge date',calendarDate(c.dischargeDateLocal)),field('Hours requested',c.hours==null?'—':`${c.hours} per week`),field('Above-40 approval',c.above40)],note:'Hours requested is informational in the source workflow. Above 40 shows a notice and stops there.'};
+ const aide={title:'Aide',fields:[field('Aide arrangement',c.aideArr),field('Aide in training',yesNo(c.aideTraining)),field('Aide name',c.aideName),field('Relationship to child',c.aideRel),field('Training placement',c.trainPlace),field('Weekly schedule',c.aideSched)],note:c.aideTraining?`${c.aideName} is training at ${c.trainPlace}. This is an active hold.`:c.discharge?`Discharge from ${c.dischargeAgency} is an active hold.`:'No active holds. Awaiting LHCSA staffing is tracked as an exception, not a hold.'};
+ return [services,aide];
+}
+
+function medicalFor(c){
+ const medical={title:'Medical',fields:[field('Medical vendor',c.medicalVendor),field('Packet generated',yesNo(c.packetSent != null)),field('Packet sent',calendarDate(c.packetSentDate)),field('Telehealth scheduled',calendarDate(c.telehealthScheduledDate)),field('Telehealth completed',calendarDate(c.telehealthCompletedDate)),field('Signed medical returned',calendarDate(c.signedDate)),field('Visit notes received',calendarDate(c.visitNotesDate))],note:'The packet uses the client order form. A vendor reply sets the telehealth schedule when it can be parsed.'};
+ let de;
+ if(c.type==='DE')de={title:'Disenrollment',fields:[field('DE submitted',calendarDate(c.deSubmittedDate)),field('DE confirmed',calendarDate(c.deConfirmedDate)),field('H78 on record',yesNo(c.h78)),field('Target conversion date',calendarDate(c.targetDate)),field('Days remaining',c.targetDate?Math.round((new Date(`${c.targetDate}T12:00:00Z`).getTime()-snapshot)/86400000):'—')],note:'The source shows remaining days until conversion and calls for a named family touchpoint every two weeks.'};
+ else if(c.type==='NoCert')de={title:'Disenrollment',fields:[field('Status','Certification case. Code 95 is absent; this case is never sent to the disenrollment vendor.')]};
+ else de={title:'Disenrollment',fields:[field('Status','Not a disenrollment case')]};
+ return [medical,de];
+}
+
+function conversationFor(c){
+ return c.msgs.map(message=>({
+  direction:message.dir,
+  channel:message.ch,
+  party:message.party,
+  sender:message.auto?'Automated':message.who,
+  subject:message.subj,
+  body:message.body,
+  status:message.stat,
+  when:time(message.d,message.h,message.d%40)
+ }));
+}
+
+function timelineFor(c){
+ return c.events.map(event=>[event.x,`${event.t} · ${time(event.d,event.h,(event.d*7)%60)}`]);
+}
+
+export const detailedCases=Object.fromEntries(sourceData.cases.map(c=>[c.id,{
+ summary:summaryFor(c),
+ services:servicesFor(c),
+ medical:medicalFor(c),
+ documents:c.documents.map(document=>[document.name,document.writtenBy,calendarDate(document.modifiedOn),document.size]),
+ conversation:conversationFor(c),
+ timeline:timelineFor(c),
+ notes:c.notes
+}]));
